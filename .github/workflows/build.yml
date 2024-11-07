@@ -16,13 +16,22 @@ on:
           - development
           - staging
           - production
+      branch_name:
+        description: 'branch to deploy (development or staging or production)'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - main
+          - dev
+          - test
   
 
 jobs:
   deploy-development:
     name: Deploy Development Build and Push
     environment: development
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'development')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/github.event.inputs.environment == 'development'' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'development')
     runs-on: ubuntu-latest
     
     steps:
